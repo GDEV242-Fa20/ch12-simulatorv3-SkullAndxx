@@ -6,8 +6,8 @@ import java.util.Random;
  * A simple model of a fox.
  * Foxes age, move, eat rabbits, and die.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2016.02.29 (2)
+ * @author Erick Rubio
+ * @version 2020.11.16 (2)
  */
 public class Fox extends Animal
 {
@@ -83,17 +83,6 @@ public class Fox extends Animal
             }
         }
     }
-
-    /**
-     * Increase the age. This could result in the fox's death.
-     */
-    private void incrementAge()
-    {
-        age++;
-        if(age > MAX_AGE) {
-            setDead();
-        }
-    }
     
     /**
      * Make this fox more hungry. This could result in the fox's death.
@@ -151,24 +140,32 @@ public class Fox extends Animal
     }
         
     /**
-     * Generate a number representing the number of births,
-     * if it can breed.
-     * @return The number of births (may be zero).
-     */
-    private int breed()
-    {
-        int births = 0;
-        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
-            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
-        }
-        return births;
+     * Use the field here to determine the age of the FOX to breed
+     * @Return the age of a fox can start breeding
+       */
+    public int getBreedingAge(){
+        return BREEDING_AGE;
     }
-
     /**
-     * A fox can breed if it has reached the breeding age.
-     */
-    private boolean canBreed()
-    {
-        return age >= BREEDING_AGE;
+     * Use the field here to determine the max age of the fox
+     * @Return the max age of a fox can start breeding
+       */
+    public int getMaxAge(){
+        return MAX_AGE;
+    }
+    
+    /**
+     * Use the field here to determine the breeding probability of the fox
+     * @Return the breeding probability of a fox can start breeding
+       */
+    public double getBreedingProbability(){
+        return BREEDING_PROBABILITY;
+    }
+    /**
+     * Use the field here to determine the max litter of the fox
+     * @Return the max litter of a fox can start breeding
+       */
+    public int getMaxLitterSize(){
+        return MAX_LITTER_SIZE;
     }
 }

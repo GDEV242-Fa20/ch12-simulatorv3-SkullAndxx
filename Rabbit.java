@@ -5,8 +5,8 @@ import java.util.Random;
  * A simple model of a rabbit.
  * Rabbits age, move, breed, and die.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2016.02.29 (2)
+ * @author Erick Rubio
+ * @version 2020.11.16
  */
 public class Rabbit extends Animal
 {
@@ -67,17 +67,6 @@ public class Rabbit extends Animal
         }
     }
 
-    /**
-     * Increase the age.
-     * This could result in the rabbit's death.
-     */
-    private void incrementAge()
-    {
-        age++;
-        if(age > MAX_AGE) {
-            setDead();
-        }
-    }
     
     /**
      * Check whether or not this rabbit is to give birth at this step.
@@ -99,25 +88,32 @@ public class Rabbit extends Animal
     }
         
     /**
-     * Generate a number representing the number of births,
-     * if it can breed.
-     * @return The number of births (may be zero).
-     */
-    private int breed()
-    {
-        int births = 0;
-        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
-            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
-        }
-        return births;
+     * Use the field here to determine the age of the rabbit
+     * @Return the age of a rabbit can start breeding
+       */
+    public int getBreedingAge(){
+        return BREEDING_AGE;
+    }
+    /**
+     * Use the field here to determine the max age of the rabbit
+     * @Return the max age of a rabbit can start breeding
+       */
+    public int getMaxAge(){
+        return MAX_AGE;
     }
 
     /**
-     * A rabbit can breed if it has reached the breeding age.
-     * @return true if the rabbit can breed, false otherwise.
-     */
-    private boolean canBreed()
-    {
-        return age >= BREEDING_AGE;
+     * Use the field here to determine the breeding probability of the rabbit
+     * @Return the breeding probability of a rabbit can start breeding
+       */
+    public double getBreedingProbability(){
+        return BREEDING_PROBABILITY;
+    }
+    /**
+     * Use the field here to determine the max litter of the rabbit
+     * @Return the max litter of a rabbit can start breeding
+       */
+    public int getMaxLitterSize(){
+        return MAX_LITTER_SIZE;
     }
 }

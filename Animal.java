@@ -1,13 +1,19 @@
 import java.util.List;
+import java.util.Random;
+
 
 /**
  * A class representing shared characteristics of animals.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2016.02.29 (2)
+ * @author Erick Rubio
+ * @version 2020.11.16 
  */
 public abstract class Animal
 {
+    //age of animal
+    private int age;
+    //Random generator
+    private static final Random rand = Randomizer.getRandom();
     // Whether the animal is alive or not.
     private boolean alive;
     // The animal's field.
@@ -88,4 +94,60 @@ public abstract class Animal
     {
         return field;
     }
+    /**
+     * Animal can breed if it has reached the breeding age.
+     * @return true if the animal can breed
+       */
+    public boolean canBreed(){
+        return age >= getBreedingAge();
+    }
+    
+    /**
+     * Return the breeding age of this animal
+     * @return the breeding age of this animal
+       */
+     abstract protected int getBreedingAge();
+
+    /**
+     * Increase the age.
+     * This could result in the rabbit's death.
+     */
+    public void incrementAge()
+    {
+        age++;
+        if(age > getMaxAge()) {
+            setDead();
+        }
+    
+    }
+    
+    /**
+     * Return the max age of this animal
+     * @return the max age of this animal
+       */
+     abstract protected int getMaxAge();    
+     
+    /**
+     * Generate a number representing the number of births,
+     * if it can breed.
+     * @return The number of births (may be zero).
+     */
+    public int breed()
+    {
+        int births = 0;
+        if(canBreed() && rand.nextDouble() <= getBreedingProbability()) {
+            births = rand.nextInt(getMaxLitterSize()) + 1;
+        }
+        return births;
+    }
+    /**
+     * Return the breeding probability
+     * @return the breeding probability of this animal
+       */
+     abstract protected double getBreedingProbability(); 
+    /**
+     * Return the Max Litter Size
+     * @return the Max Litter Size of this animal
+       */
+     abstract protected int getMaxLitterSize(); 
 }
