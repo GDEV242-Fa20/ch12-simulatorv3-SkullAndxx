@@ -4,6 +4,11 @@ import java.util.Random;
 
 /**
  * A class representing shared characteristics of animals.
+ * Some methods in this abstract class are abstract as well since they are never
+ * directly used by the animal class.
+ * 
+ * Wolves are the Alpha predator in this scenerio that begin slow but with so many
+ * rabbits and foxes it overtakes the map.
  * 
  * @author Erick Rubio
  * @version 2020.11.16 
@@ -29,6 +34,7 @@ public abstract class Animal
      */
     public Animal(Field field, Location location)
     {
+        age = 0;
         alive = true;
         this.field = field;
         setLocation(location);
